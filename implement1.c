@@ -69,8 +69,6 @@ void op_nop(stack_t **store, unsigned int numr)
  */
 void op_sub(stack_t **store, unsigned int numr)
 {
-	int one = (*store)->next->n;
-	int two = (*store)->n;
 
 	if (!store || !(*store) || !(*store)->next)
 	{
@@ -79,14 +77,8 @@ void op_sub(stack_t **store, unsigned int numr)
 		exit(EXIT_FAILURE);
 	}
 
-	if ((two < 0 && one > INT_MAX + two) || (two > 0 && one < INT_MIN + two))
-	{
-		fprintf(stderr, "L%u: sub result out of range\n", numr);
-		free_jay();
-		exit(EXIT_FAILURE);
-	}
 
-	(*store)->next->n = one - two;
+	(*store)->next->n -= (*store)->n;
 
 	op_pop(store, numr);
 }
