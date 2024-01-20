@@ -69,25 +69,24 @@ void op_nop(stack_t **store, unsigned int numr)
  */
 void op_sub(stack_t **store, unsigned int numr)
 {
-	int count = 0;
-	stack_t *one = *store;
-	stack_t *two = NULL;
+	int one = (*store)->next->n;
+	int two = (*store)->n;
 
-	while (one && count < 2)
-	{
-		two = one;
-		one = one->next;
-		count++;
-	}
-
-	if (count < 2)
+	if (!store || !(*store) || !(*store)->next)
 	{
 		fprintf(stderr, "L%u: can't sub, stack too short\n", numr);
 		free_jay();
 		exit(EXIT_FAILURE);
 	}
 
-	two->n -= one->n;
+	if ((two < 0 && one > INT_MAX + two) || (two > 0 && one < INT_MIN + two))
+	{
+		fprintf(stderr, "L%u: sub result out of range\n", numr);
+		free_jay();
+		exit(EXIT_FAILURE);
+	}
+
+	(*store)->next->n = one - two;
 
 	op_pop(store, numr);
 }

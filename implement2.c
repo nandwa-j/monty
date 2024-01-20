@@ -96,7 +96,7 @@ void op_pchar(stack_t **store, unsigned int numr)
 {
 	int value = (*store)->n;
 
-	if (store == NULL || *store == NULL)
+	if (!store || !(*store))
 	{
 		fprintf(stderr, "L%u: can't pchar, stack empty\n", numr);
 		free_jay();
