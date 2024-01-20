@@ -81,11 +81,11 @@ void op_stack(stack_t **store, unsigned int numr)
 }
 
 /**
- * is_ascii - checks if a character is an ASCII character
+ * _isascii - checks if a character is an ASCII character
  * @c: character to be checked
  * Return: 1 if ASCII, 0 otherwise
  */
-int _isascii (char c)
+int _isascii(char c)
 {
 	return ((unsigned char)c <= 127);
 }

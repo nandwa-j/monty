@@ -47,25 +47,15 @@ void op_swap(stack_t **store, unsigned int numr)
  */
 void op_add(stack_t **store, unsigned int numr)
 {
-	int count = 0;
-	stack_t *one = *store;
-	stack_t *two = NULL;
 
-	while (one && count < 2)
-	{
-		two = one;
-		one = one->next;
-		count++;
-	}
-
-	if (count < 2)
+	if (!store || !(*store) || !(*store)->next)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", numr);
 		free_jay();
 		exit(EXIT_FAILURE);
 	}
 
-	two->n += one->n;
+	(*store)->next->n += (*store)->n;
 
 	op_pop(store, numr);
 }

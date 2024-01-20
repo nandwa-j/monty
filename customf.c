@@ -1,5 +1,10 @@
 #include "monty.h"
-
+/**
+ * char_search - search if a char is inside a string
+ * @str: string to review
+ * @c: char to find
+ * Return: 1 if success 0 if not
+ */
 int char_search(char *str, char c)
 {
 	int index = 0;
@@ -15,7 +20,12 @@ int char_search(char *str, char c)
 
 	return (0);
 }
-
+/**
+ * custom_strtok - function that cut a string into tokens
+ * @str: string to cut in parts
+ * @delimiters: delimiters
+ * Return: first partition
+ */
 char *custom_strtok(char *str, char *delimiters)
 {
 	static char *lastToken;

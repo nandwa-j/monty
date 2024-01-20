@@ -2,13 +2,13 @@
 #include <string.h>
 #include "monty.h"
 
+global_t jay;
 /**
  * main - Entry point
  * @argc: argument count
  * @argv: argument vector
  * Return: 0 on success
  */
-global_t jay;
 
 int main(int argc, char *argv[])
 {
