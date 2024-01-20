@@ -8,35 +8,24 @@
  */
 void op_swap(stack_t **store, unsigned int numr)
 {
-	int count = 0;
-	stack_t *one = *store;
-	stack_t *two = NULL;
+	stack_t *top = *store;
+	stack_t *next = top->next;
 
-	while (one && count < 2)
-	{
-		two = one;
-		one = one->next;
-		count++;
-	}
-
-	if (count < 2)
+	if (!store || !(*store) || !(*store)->next)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", numr);
 		free_jay();
 		exit(EXIT_FAILURE);
 	}
 
-	two->prev->next = two->next;
-	if (two->next)
-		two->next->prev = two->prev;
+	top->next = next->next;
+	top->prev = next;
+	if (next->next)
+		next->next->prev = top;
+	next->prev = NULL;
+	next->next = top;
 
-	two->next = one;
-	two->prev = one->prev;
-	if (one->prev)
-		one->prev->next = two;
-	one->prev = two;
-
-	*store = two;
+	*store = next;
 }
 
 /**
